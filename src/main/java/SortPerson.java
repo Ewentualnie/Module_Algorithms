@@ -2,16 +2,11 @@ import java.util.Arrays;
 
 public class SortPerson {
     Person[] people = new Person[]{
-            new Person(90, 100, 20),
+            new Person(900, 100, 20),
             new Person(150, 120, 20),
             new Person(150, 130, 20),
-            new Person(150, 100, 20),
-            new Person(150, 90, 20),
-            new Person(150, 100, 20),
-            new Person(160, 90, 20),
-            new Person(90, 100, 20),
-            new Person(100, 120, 20),
-            new Person(150, 100, 20),
+            new Person(900, 100, 20),
+            new Person(900, 100, 20)
     };
     PersonCompare compare = new PersonCompare();
 
@@ -35,7 +30,10 @@ public class SortPerson {
         Arrays.sort(sortPerson.people, sortPerson.compare.heightLower);
 //        Arrays.sort(sortPerson.people, sortPerson.compare.heightHigher);
 
-//        3 third solution, я вважаю що мій метод підрахунку виражається в розрахунку (2n)
+            /*
+            3 third solution, я вважаю що мій метод підрахунку виражається в розрахунку "Big O (3n)"
+            через те що прохоить кілька разів по масиву
+            */
         System.out.println("count " + sortPerson.getCountHeight(sortPerson.people));
     }
 
@@ -44,15 +42,12 @@ public class SortPerson {
         Person[] persons = new Person[people.length];
         System.arraycopy(people, 0, persons, 0, people.length);
         Arrays.sort(persons, compare.weightHigher);
-        for (int i = 0; i < persons.length; i++) {
-            int midCount = 0;
+        for (int i = 0; i < persons.length; ) {
 
             int subArrayLength = getLength(persons, i);
-
-            if (subArrayLength != 0) {
-                midCount = getCount(persons, i, subArrayLength);
-                i += midCount;
-            }
+            System.out.println(subArrayLength);
+            int midCount = getCount(persons, i, subArrayLength);
+            i += subArrayLength;
             count += midCount;
         }
         return count;
@@ -64,14 +59,13 @@ public class SortPerson {
                 start < persons.length - 1) {
             end++;
         }
-        return end - start;
+        return end == start ? 1 : end - start;
     }
 
     private int getCount(Person[] persons, int startPos, int length) {
         Person[] midArr = new Person[length];
         System.arraycopy(persons, startPos, midArr, 0, length);
         Arrays.sort(midArr, compare.heightHigher);
-
         int count = 0;
         int height = midArr[0].getHeight();
 
@@ -81,6 +75,6 @@ public class SortPerson {
                 count++;
             }
         }
-        return count;
+        return midArr.length == 1 ? 1 : count;
     }
 }
