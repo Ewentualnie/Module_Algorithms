@@ -2,11 +2,10 @@ import java.util.Arrays;
 
 public class SortPerson {
     Person[] people = new Person[]{
-            new Person(900, 100, 20),
+            new Person(90, 100, 20),
             new Person(150, 120, 20),
             new Person(150, 130, 20),
-            new Person(900, 100, 20),
-            new Person(900, 100, 20)
+            new Person(150, 100, 20)
     };
     PersonCompare compare = new PersonCompare();
 
@@ -65,7 +64,7 @@ public class SortPerson {
         Person[] midArr = new Person[length];
         System.arraycopy(persons, startPos, midArr, 0, length);
         Arrays.sort(midArr, compare.heightHigher);
-        int count = 0;
+        int count = 1;
         int height = midArr[0].getHeight();
 
         for (Person person : midArr) {
