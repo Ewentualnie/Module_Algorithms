@@ -22,13 +22,20 @@ public class SortPerson {
 //            Person person = new Person(i % 2 != 0 ? 150 : 160, 100, k);
 //            sortPerson.persons[i] = person;
 //        }
-//        1
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.ageLower);
-//
-//        //2
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.weightLower);
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.heightLower);
 
+
+//        1 First solution
+        Arrays.sort(sortPerson.people, sortPerson.compare.ageLower);
+//        Arrays.sort(sortPerson.people, sortPerson.compare.ageHigher);
+
+//        2 second solution
+        Arrays.sort(sortPerson.people, sortPerson.compare.weightLower);
+//        Arrays.sort(sortPerson.people, sortPerson.compare.weightHigher);
+
+        Arrays.sort(sortPerson.people, sortPerson.compare.heightLower);
+//        Arrays.sort(sortPerson.people, sortPerson.compare.heightHigher);
+
+//        3 third solution
         System.out.println("count " + sortPerson.getCountHeight(sortPerson.people));
     }
 
@@ -40,7 +47,7 @@ public class SortPerson {
         for (int i = 0; i < persons.length; i++) {
             int midCount = 0;
 
-            int end = getLength(persons, i);
+            int end = getLastPosition(persons, i);
             int subArrayLength = end - i;
 
             if (subArrayLength != 0) {
@@ -52,7 +59,7 @@ public class SortPerson {
         return count;
     }
 
-    private int getLength(Person[] persons, int start) {
+    private int getLastPosition(Person[] persons, int start) {
         int end = start;
         while (persons[start].getWeight() == persons[end].getWeight() &&
                 start < persons.length - 1) {
