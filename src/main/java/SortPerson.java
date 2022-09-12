@@ -47,8 +47,7 @@ public class SortPerson {
         for (int i = 0; i < persons.length; i++) {
             int midCount = 0;
 
-            int end = getLastPosition(persons, i);
-            int subArrayLength = end - i;
+            int subArrayLength = getLength(persons, i);
 
             if (subArrayLength != 0) {
                 midCount = getCount(persons, i, subArrayLength);
@@ -59,13 +58,13 @@ public class SortPerson {
         return count;
     }
 
-    private int getLastPosition(Person[] persons, int start) {
+    private int getLength(Person[] persons, int start) {
         int end = start;
         while (persons[start].getWeight() == persons[end].getWeight() &&
                 start < persons.length - 1) {
             end++;
         }
-        return end;
+        return end - start;
     }
 
     private int getCount(Person[] persons, int startPos, int length) {
