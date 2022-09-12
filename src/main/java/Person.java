@@ -13,10 +13,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "{height=" + height +
-                ", weight=" + weight +
-                ", age=" + age +
-                "}";
+        return String.format("Person{%-3d, %-3d, %-2d}", height, weight, age);
     }
 
     public int getHeight() {

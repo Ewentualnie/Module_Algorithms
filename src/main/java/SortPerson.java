@@ -1,15 +1,15 @@
 import java.util.Arrays;
 
 public class SortPerson {
-    Person[] persons = new Person[]{
-            new Person(150, 100, 20),
+    Person[] people = new Person[]{
+            new Person(90, 100, 20),
             new Person(150, 120, 20),
             new Person(150, 130, 20),
             new Person(150, 100, 20),
             new Person(150, 90, 20),
             new Person(150, 100, 20),
             new Person(160, 90, 20),
-            new Person(150, 100, 20),
+            new Person(90, 100, 20),
             new Person(100, 120, 20),
             new Person(150, 100, 20),
     };
@@ -22,38 +22,57 @@ public class SortPerson {
 //            Person person = new Person(i % 2 != 0 ? 150 : 160, 100, k);
 //            sortPerson.persons[i] = person;
 //        }
-        //1
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.age);
+//        1
+//        Arrays.sort(sortPerson.persons, sortPerson.compare.ageLower);
 //
 //        //2
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.weight);
-//        Arrays.sort(sortPerson.persons, sortPerson.compare.height);
+//        Arrays.sort(sortPerson.persons, sortPerson.compare.weightLower);
+//        Arrays.sort(sortPerson.persons, sortPerson.compare.heightLower);
 
-        System.out.println("count " + sortPerson.getCountDifferentHeight(sortPerson.persons));
+        System.out.println("count " + sortPerson.getCountHeight(sortPerson.people));
     }
 
-    public int getCountDifferentHeight(Person[] people) {
+    public int getCountHeight(Person[] people) {
         int count = 0;
         Person[] persons = new Person[people.length];
         System.arraycopy(people, 0, persons, 0, people.length);
-        Arrays.sort(persons, compare.weight);
+        Arrays.sort(persons, compare.weightHigher);
         for (int i = 0; i < persons.length; i++) {
-            int height = persons[i].getHeight();
-            int weight = persons[i].getWeight();
             int midCount = 0;
-            while (weight == persons[i].getWeight() && i < persons.length - 1) {
-                if (persons[i].getHeight() != height) {
-                    midCount++;
-                }
-                i++;
+
+            int end = getLength(persons, i);
+            int subArrayLength = end - i;
+
+            if (subArrayLength != 0) {
+                midCount = getCount(persons, i, subArrayLength);
+                i += midCount;
             }
-            if (midCount == 0) {
+            count += midCount;
+        }
+        return count;
+    }
+
+    private int getLength(Person[] persons, int start) {
+        int end = start;
+        while (persons[start].getWeight() == persons[end].getWeight() &&
+                start < persons.length - 1) {
+            end++;
+        }
+        return end;
+    }
+
+    private int getCount(Person[] persons, int startPos, int length) {
+        Person[] midArr = new Person[length];
+        System.arraycopy(persons, startPos, midArr, 0, length);
+        Arrays.sort(midArr, compare.heightHigher);
+        int count = 0;
+        int height = midArr[0].getHeight();
+        for (Person person : midArr) {
+            if (person.getHeight() != height) {
+                height = person.getHeight();
                 count++;
-            }else {
-                count+=midCount;
             }
         }
-        System.out.println(Arrays.toString(persons));
         return count;
     }
 }
