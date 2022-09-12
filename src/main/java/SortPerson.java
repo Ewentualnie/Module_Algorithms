@@ -45,7 +45,6 @@ public class SortPerson {
         for (int i = 0; i < persons.length; ) {
 
             int subArrayLength = getLength(persons, i);
-            System.out.println(subArrayLength);
             int midCount = getCount(persons, i, subArrayLength);
             i += subArrayLength;
             count += midCount;
