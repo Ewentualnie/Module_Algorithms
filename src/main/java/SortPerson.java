@@ -35,7 +35,7 @@ public class SortPerson {
         Arrays.sort(sortPerson.people, sortPerson.compare.heightLower);
 //        Arrays.sort(sortPerson.people, sortPerson.compare.heightHigher);
 
-//        3 third solution
+//        3 third solution, я вважаю що мій метод підрахунку виражається в розрахунку (2n)
         System.out.println("count " + sortPerson.getCountHeight(sortPerson.people));
     }
 
