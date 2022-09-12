@@ -71,8 +71,10 @@ public class SortPerson {
         Person[] midArr = new Person[length];
         System.arraycopy(persons, startPos, midArr, 0, length);
         Arrays.sort(midArr, compare.heightHigher);
+
         int count = 0;
         int height = midArr[0].getHeight();
+
         for (Person person : midArr) {
             if (person.getHeight() != height) {
                 height = person.getHeight();
