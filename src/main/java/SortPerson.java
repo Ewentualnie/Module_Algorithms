@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class SortPerson {
     Person[] persons = new Person[]{
@@ -38,7 +37,23 @@ public class SortPerson {
         Person[] persons = new Person[people.length];
         System.arraycopy(people, 0, persons, 0, people.length);
         Arrays.sort(persons, compare.weight);
-
+        for (int i = 0; i < persons.length; i++) {
+            int height = persons[i].getHeight();
+            int weight = persons[i].getWeight();
+            int midCount = 0;
+            while (weight == persons[i].getWeight() && i < persons.length - 1) {
+                if (persons[i].getHeight() != height) {
+                    midCount++;
+                }
+                i++;
+            }
+            if (midCount == 0) {
+                count++;
+            }else {
+                count+=midCount;
+            }
+        }
+        System.out.println(Arrays.toString(persons));
         return count;
     }
 }
